@@ -1,10 +1,240 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Redirecting...</title>
-  <meta http-equiv="refresh" content="0; url=https://azerosolutions.tech/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A-Zero Solutions - Under Construction</title>
+    <style>
+        /* --- CSS Reset & Core Variables --- */
+        :root {
+            --bg-light: #f0f4f8;
+            --text-dark: #2c3e50;
+            --text-grey: #607d8b;
+            --accent-green: #42b983;
+            --blob-color-1: rgba(66, 185, 131, 0.6);
+            --blob-color-2: rgba(45, 212, 191, 0.5);
+            --blob-color-3: rgba(128, 236, 188, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            /* min-height ensures it covers the screen even if content is tall */
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Prevents scrollbars from moving blobs */
+            position: relative;
+        }
+
+        /* --- Watery Background Animation --- */
+        .bg-animation-container {
+            position: fixed; /* Fixed prevents ios bounce issues */
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 1;
+            overflow: hidden;
+            /* Reduced blur slightly for better mobile performance */
+            filter: blur(80px); 
+            transform: translate3d(0, 0, 0);
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            mix-blend-mode: multiply;
+            /* GPU Acceleration hint */
+            will-change: transform; 
+            animation: moveAndMorph infinite alternate ease-in-out;
+        }
+
+        .blob-1 {
+            top: 10%; left: 20%;
+            width: 60vw; height: 60vw;
+            background-color: var(--blob-color-1);
+            animation-duration: 35s;
+        }
+
+        .blob-2 {
+            bottom: 20%; right: 10%;
+            width: 50vw; height: 50vw;
+            background-color: var(--blob-color-2);
+            animation-duration: 45s;
+            animation-delay: -10s;
+        }
+
+        .blob-3 {
+            top: 40%; right: 30%;
+            width: 45vw; height: 45vw;
+            background-color: var(--blob-color-3);
+            animation-duration: 40s;
+            animation-delay: -5s;
+        }
+
+        /* Mobile specific adjustments for blobs */
+        @media (max-width: 768px) {
+            .bg-animation-container { filter: blur(60px); }
+            .blob-1 { width: 90vw; height: 90vw; top: -10%; left: -10%; }
+            .blob-2 { width: 80vw; height: 80vw; bottom: -10%; right: -10%; }
+            .blob-3 { width: 70vw; height: 70vw; }
+        }
+
+        @keyframes moveAndMorph {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+            50% {
+                 border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+            100% {
+                transform: translate(10vw, -5vh) scale(1.1) rotate(20deg);
+                border-radius: 40% 60% 50% 50% / 40% 60% 50% 60%;
+            }
+        }
+
+        /* --- Main Content Card --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            
+            /* Responsive Padding */
+            padding: 4rem 3rem;
+            
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            margin: 20px; /* Safety margin for very small screens */
+            transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 2.5rem 1.5rem; /* Tighter padding for mobile */
+                border-radius: 20px;
+            }
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; } /* Smaller title on mobile */
+        }
+
+        .domain-accent {
+            color: var(--accent-green);
+            background: linear-gradient(135deg, var(--accent-green), #2dd4bf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap; /* Keeps .tech attached to the name */
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-grey);
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 600px) {
+            h2 { font-size: 1rem; margin-bottom: 1.5rem; }
+        }
+
+        p.status {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-grey);
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 600px) {
+            p.status { font-size: 0.95rem; margin-bottom: 2rem; }
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background-color: var(--accent-green);
+            background-image: linear-gradient(135deg, var(--accent-green), #34a072);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -10px rgba(66, 185, 131, 0.5);
+            width: auto;
+        }
+
+        @media (max-width: 600px) {
+            .btn { width: 100%; } /* Full width button on mobile */
+        }
+
+        .btn:active {
+            transform: scale(0.98); /* Touch feedback */
+        }
+
+        .btn svg {
+            margin-right: 10px;
+            height: 20px;
+            width: 20px;
+        }
+    </style>
 </head>
 <body>
-  <p>If you are not redirected automatically, follow this <a href="https://azerosolutions.tech/">link</a>.</p>
+
+    <div class="bg-animation-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>AZero Solutions<span class="domain-accent">.tech</span></h1>
+        </header>
+        <main>
+            <h2>Secure digital foundations being laid.</h2>
+            <p class="status">
+                Our official website is currently under construction. <br>
+                We are getting things ready on the backend. Please check back soon.
+            </p>
+            <footer>
+                <a href="https://github.com/AZero-Solutions" class="btn">
+                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.42-1.305.763-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.435.375.81 1.11.81 2.235 0 1.61-.015 2.925-.015 3.33 0 .315.225.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    Visit us on GitHub
+                </a>
+            </footer>
+        </main>
+    </div>
+
 </body>
 </html>
