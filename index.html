@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>A-Zero Solutions - Under Construction</title>
+    <title>AZero Solutions - Coming Soon</title>
     <style>
         /* --- CSS Reset & Core Variables --- */
         :root {
             --bg-light: #f0f4f8;
-            --text-dark: #2c3e50;
-            --text-grey: #607d8b;
-            --accent-green: #42b983;
-            --blob-color-1: rgba(66, 185, 131, 0.6);
-            --blob-color-2: rgba(45, 212, 191, 0.5);
-            --blob-color-3: rgba(128, 236, 188, 0.5);
+            --text-dark: #1a202c;
+            --text-grey: #718096;
+            --accent-green: #10b981; /* Emerald green */
+            --accent-dark: #047857;
+            
+            --blob-color-1: rgba(16, 185, 129, 0.4);
+            --blob-color-2: rgba(52, 211, 153, 0.4);
+            --blob-color-3: rgba(110, 231, 183, 0.4);
         }
 
         * {
@@ -26,34 +28,31 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-light);
             color: var(--text-dark);
-            /* min-height ensures it covers the screen even if content is tall */
             min-height: 100vh;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Prevents scrollbars from moving blobs */
+            overflow: hidden;
             position: relative;
         }
 
         /* --- Watery Background Animation --- */
         .bg-animation-container {
-            position: fixed; /* Fixed prevents ios bounce issues */
+            position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: 1;
             overflow: hidden;
-            /* Reduced blur slightly for better mobile performance */
-            filter: blur(80px); 
-            transform: translate3d(0, 0, 0);
+            filter: blur(80px);
+            transform: translate3d(0, 0, 0); /* HW acceleration */
         }
 
         .blob {
             position: absolute;
             border-radius: 50%;
             mix-blend-mode: multiply;
-            /* GPU Acceleration hint */
-            will-change: transform; 
-            animation: moveAndMorph infinite alternate ease-in-out;
+            will-change: transform;
+            animation: moveAndMorph 20s infinite alternate ease-in-out;
         }
 
         .blob-1 {
@@ -79,134 +78,142 @@
             animation-delay: -5s;
         }
 
-        /* Mobile specific adjustments for blobs */
         @media (max-width: 768px) {
-            .bg-animation-container { filter: blur(60px); }
-            .blob-1 { width: 90vw; height: 90vw; top: -10%; left: -10%; }
-            .blob-2 { width: 80vw; height: 80vw; bottom: -10%; right: -10%; }
-            .blob-3 { width: 70vw; height: 70vw; }
+            .bg-animation-container { filter: blur(50px); } /* Reduce blur for mobile perf */
+            .blob-1 { width: 90vw; height: 90vw; opacity: 0.8; }
+            .blob-2 { width: 80vw; height: 80vw; opacity: 0.8; }
+            .blob-3 { display: none; } /* Remove one blob on mobile to clean up visuals */
         }
 
         @keyframes moveAndMorph {
-            0% {
-                transform: translate(0, 0) scale(1) rotate(0deg);
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            }
-            50% {
-                 border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-            }
-            100% {
-                transform: translate(10vw, -5vh) scale(1.1) rotate(20deg);
-                border-radius: 40% 60% 50% 50% / 40% 60% 50% 60%;
-            }
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            100% { transform: translate(5vw, -5vh) scale(1.1) rotate(20deg); border-radius: 40% 60% 50% 50% / 40% 60% 50% 60%; }
         }
 
         /* --- Main Content Card --- */
         .container {
             position: relative;
             z-index: 10;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            
-            /* Responsive Padding */
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 4rem 3rem;
-            
             border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             text-align: center;
-            max-width: 600px;
+            max-width: 650px;
             width: 90%;
-            margin: 20px; /* Safety margin for very small screens */
             transition: transform 0.3s ease;
         }
 
+        .container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mobile Adjustments for Container */
         @media (max-width: 600px) {
             .container {
-                padding: 2.5rem 1.5rem; /* Tighter padding for mobile */
-                border-radius: 20px;
+                padding: 2.5rem 1.5rem;
+                width: 92%;
             }
         }
 
-        .container:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Typography */
+        /* --- Typography & Elements --- */
         h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 0.5rem;
+            letter-spacing: -1.5px;
+            margin-bottom: 0.25rem;
             line-height: 1.1;
-            color: var(--text-dark);
-        }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; } /* Smaller title on mobile */
-        }
-
-        .domain-accent {
-            color: var(--accent-green);
-            background: linear-gradient(135deg, var(--accent-green), #2dd4bf);
+            /* Gradient Text */
+            background: linear-gradient(135deg, var(--text-dark) 30%, var(--accent-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            white-space: nowrap; /* Keeps .tech attached to the name */
         }
 
-        h2 {
-            font-size: 1.25rem;
-            font-weight: 500;
+        .subtitle {
+            font-size: 1.1rem;
             color: var(--text-grey);
             margin-bottom: 2rem;
-        }
-        
-        @media (max-width: 600px) {
-            h2 { font-size: 1rem; margin-bottom: 1.5rem; }
+            font-weight: 500;
         }
 
-        p.status {
-            font-size: 1rem;
-            line-height: 1.6;
+        /* Mobile Font Sizing */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .subtitle { font-size: 1rem; margin-bottom: 1.5rem; }
+        }
+
+        /* --- Services Pills (Tags) --- */
+        .pills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2.5rem;
+        }
+
+        .pill {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-dark);
+            background-color: rgba(16, 185, 129, 0.15); /* Light Green */
+            padding: 8px 16px;
+            border-radius: 50px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+
+        .pill:hover {
+            background-color: rgba(16, 185, 129, 0.25);
+            transform: scale(1.05);
+        }
+
+        /* --- Footer / Contact Section --- */
+        .separator {
+            height: 1px;
+            width: 50%;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+            margin: 0 auto 2rem auto;
+        }
+
+        .launch-info {
+            font-size: 0.9rem;
             color: var(--text-grey);
-            margin-bottom: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        @media (max-width: 600px) {
-            p.status { font-size: 0.95rem; margin-bottom: 2rem; }
-        }
-
-        /* --- Buttons --- */
-        .btn {
+        .contact-link {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            padding: 1rem 2.5rem;
-            background-color: var(--accent-green);
-            background-image: linear-gradient(135deg, var(--accent-green), #34a072);
-            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
             text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px -10px rgba(66, 185, 131, 0.5);
-            width: auto;
+            padding-bottom: 2px;
+            border-bottom: 2px solid var(--accent-green);
+            transition: all 0.2s ease;
         }
 
-        @media (max-width: 600px) {
-            .btn { width: 100%; } /* Full width button on mobile */
+        .contact-link:hover {
+            color: var(--accent-dark);
+            border-bottom-color: var(--accent-dark);
         }
 
-        .btn:active {
-            transform: scale(0.98); /* Touch feedback */
+        /* Icon for email */
+        .contact-link svg {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            fill: currentColor;
         }
 
-        .btn svg {
-            margin-right: 10px;
-            height: 20px;
-            width: 20px;
-        }
     </style>
 </head>
 <body>
@@ -219,21 +226,26 @@
 
     <div class="container">
         <header>
-            <h1>AZero Solutions<span class="domain-accent">.tech</span></h1>
+            <h1>AZero Solutions</h1>
+            <p class="subtitle">Secure digital foundations being laid.</p>
         </header>
-        <main>
-            <h2>Secure digital foundations being laid.</h2>
-            <p class="status">
-                Our official website is currently under construction. <br>
-                We are getting things ready on the backend. Please check back soon.
-            </p>
-            <footer>
-                <a href="https://github.com/AZero-Solutions" class="btn">
-                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.42-1.305.763-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.435.375.81 1.11.81 2.235 0 1.61-.015 2.925-.015 3.33 0 .315.225.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                    Visit us on GitHub
-                </a>
-            </footer>
-        </main>
+
+        <div class="pills-container">
+            <span class="pill">Cloud Security</span>
+            <span class="pill">Web Development</span>
+            <span class="pill">IT Consulting</span>
+        </div>
+
+        <div class="separator"></div>
+
+        <footer>
+            <p class="launch-info">Estimated Launch: Q1 2026</p>
+            
+            <a href="mailto:contact@azerosolutions.tech" class="contact-link">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                info@azerosolutions.tech
+            </a>
+        </footer>
     </div>
 
 </body>
