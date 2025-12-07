@@ -1,0 +1,307 @@
+/* --- CSS Reset & Core Variables --- */
+:root {
+    /* LIGHT MODE (Default) */
+    --bg-color: #f0f4f8;
+    --text-main: #1a202c;
+    --text-secondary: #718096;
+    --accent-green: #10b981;
+    --accent-dark: #047857;
+    
+    --container-bg: rgba(255, 255, 255, 0.75);
+    --container-border: rgba(255, 255, 255, 0.8);
+    --container-shadow: rgba(0, 0, 0, 0.05);
+    
+    --blob-1: rgba(16, 185, 129, 0.4);
+    --blob-2: rgba(52, 211, 153, 0.4);
+    --blob-3: rgba(110, 231, 183, 0.4);
+
+    --pill-bg: rgba(16, 185, 129, 0.15);
+    --pill-border: rgba(16, 185, 129, 0.2);
+    
+    /* Cursor: Dark Grey for Light Mode */
+    --cursor-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='%232c3e50' stroke='white' stroke-width='1' d='M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84a.484.484 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.488.488 0 0 0-.59.22L2.09 8.87a.49.49 0 0 0 .12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.27.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54c.59-.24 1.13-.57 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z'/%3E%3C/svg%3E");
+}
+
+/* DARK MODE OVERRIDES */
+[data-theme="dark"] {
+    --bg-color: #0f172a; /* Slate 900 */
+    --text-main: #f8fafc; /* Slate 50 */
+    --text-secondary: #94a3b8; /* Slate 400 */
+    --accent-green: #34d399; /* Lighter green for dark mode */
+    --accent-dark: #6ee7b7;
+
+    --container-bg: rgba(30, 41, 59, 0.70); /* Slate 800 Glass */
+    --container-border: rgba(255, 255, 255, 0.1);
+    --container-shadow: rgba(0, 0, 0, 0.5);
+
+    /* Dim the blobs slightly in dark mode */
+    --blob-1: rgba(16, 185, 129, 0.25);
+    --blob-2: rgba(52, 211, 153, 0.25);
+    --blob-3: rgba(110, 231, 183, 0.25);
+
+    --pill-bg: rgba(52, 211, 153, 0.1);
+    --pill-border: rgba(52, 211, 153, 0.2);
+
+    /* Cursor: White for Dark Mode */
+    --cursor-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' stroke='%23000000' stroke-width='0.5' d='M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84a.484.484 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.488.488 0 0 0-.59.22L2.09 8.87a.49.49 0 0 0 .12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.27.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54c.59-.24 1.13-.57 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z'/%3E%3C/svg%3E");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    /* Dynamic Cursor */
+    cursor: var(--cursor-url) 16 16, auto;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a, .pill, button {
+    cursor: pointer;
+}
+
+/* --- Toggle Button --- */
+.theme-toggle-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    background: var(--container-bg);
+    border: 1px solid var(--container-border);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1);
+}
+
+.theme-toggle-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--text-main);
+    transition: fill 0.3s ease;
+}
+
+/* --- Watery Background Animation --- */
+.bg-animation-container {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1;
+    overflow: hidden;
+    filter: blur(80px);
+    transform: translate3d(0, 0, 0);
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+    will-change: transform;
+    animation: moveAndMorph 20s infinite alternate ease-in-out;
+}
+
+[data-theme="dark"] .blob {
+    mix-blend-mode: screen; /* Blend mode switch for dark background */
+}
+
+.blob-1 {
+    top: 10%; left: 20%;
+    width: 60vw; height: 60vw;
+    background-color: var(--blob-1);
+    animation-duration: 35s;
+}
+
+.blob-2 {
+    bottom: 20%; right: 10%;
+    width: 50vw; height: 50vw;
+    background-color: var(--blob-2);
+    animation-duration: 45s;
+    animation-delay: -10s;
+}
+
+.blob-3 {
+    top: 40%; right: 30%;
+    width: 45vw; height: 45vw;
+    background-color: var(--blob-3);
+    animation-duration: 40s;
+    animation-delay: -5s;
+}
+
+@media (max-width: 768px) {
+    .bg-animation-container { filter: blur(50px); }
+    .blob-1 { width: 90vw; height: 90vw; opacity: 0.8; }
+    .blob-2 { width: 80vw; height: 80vw; opacity: 0.8; }
+    .blob-3 { display: none; }
+}
+
+@keyframes moveAndMorph {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    100% { transform: translate(5vw, -5vh) scale(1.1) rotate(20deg); border-radius: 40% 60% 50% 50% / 40% 60% 50% 60%; }
+}
+
+/* --- Main Content Card --- */
+.container {
+    position: relative;
+    z-index: 10;
+    background: var(--container-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 4rem 3rem;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px -10px var(--container-shadow);
+    border: 1px solid var(--container-border);
+    text-align: center;
+    max-width: 650px;
+    width: 90%;
+    transition: transform 0.3s ease, background 0.3s ease, border 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-3px);
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 2.5rem 1.5rem;
+        width: 92%;
+    }
+    .theme-toggle-btn {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* --- Typography & Elements --- */
+h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    margin-bottom: 0.25rem;
+    line-height: 1.1;
+    
+    background: linear-gradient(
+        110deg, 
+        var(--text-main) 20%, 
+        var(--accent-green) 50%, 
+        var(--text-main) 80%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    animation: textShine 4s linear infinite;
+}
+
+@keyframes textShine {
+    to { background-position: 200% center; }
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 2.2rem; }
+    .subtitle { font-size: 1rem; margin-bottom: 1.5rem; }
+}
+
+/* --- Services Pills (Tags) --- */
+.pills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 2.5rem;
+}
+
+.pill {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    background-color: var(--pill-bg);
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1px solid var(--pill-border);
+    transition: all 0.2s ease;
+}
+
+.pill:hover {
+    background-color: rgba(16, 185, 129, 0.25);
+    transform: scale(1.05);
+}
+
+/* --- Footer / Contact Section --- */
+.separator {
+    height: 1px;
+    width: 50%;
+    background: linear-gradient(90deg, transparent, rgba(128,128,128,0.2), transparent);
+    margin: 0 auto 2rem auto;
+}
+
+.launch-info {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 2px solid var(--accent-green);
+    transition: all 0.2s ease;
+}
+
+.contact-link:hover {
+    color: var(--accent-green);
+    border-bottom-color: var(--accent-dark);
+}
+
+.contact-link svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    fill: currentColor;
+}
+
+.copyright {
+    margin-top: 2rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
